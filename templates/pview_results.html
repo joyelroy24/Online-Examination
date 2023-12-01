@@ -1,0 +1,86 @@
+{% include 'parentheader.html' %}
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/static/exam3.jpg); background-attachment: fixed;height: auto" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class>
+			<div class="row">
+				<div class="col-md-12  text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+<center>
+
+<form method="post">
+
+{% if data['result'] %}
+		<h1>{{data['name']}} RESULT</h1>
+		<table class="table" style="width: 800px">
+			<tr>
+				<th>{{data['result'][0]['total_mark']}} OUT OF {{data['total']}}</th>
+			</tr>
+		</table>
+		
+{% elif data['reg'] %}
+<h1>REGISTERED EXAMS OF {{data['name']}}</h1>
+<table class="table" style="width: 1200px">
+		 	<tr>
+		 		<th>EXAM TITLE</th>
+		 		<th>EXAM DETAILS</th>
+		 		<th>EXAMINER</th>
+		 		<th>EXAM FEE</th>
+		 		<th>EXAM DATE</th>
+		 		<th>SUBJECT</th>
+		 		<th>STATUS</th>
+		 		<th>RESULT</th>
+		 	</tr>
+		 	{% for row in data['reg'] %}
+		 	<tr>
+		 		<td>{{row['exam_title']}}</td>
+		 		<td>{{row['exam_details']}}</td>
+		 		<td>{{row['first_name']}}</td>
+		 		<td>{{row['exam_fees']}}</td>
+		 		<td>{{row['exam_date']}}</td>
+		 		<td>{{row['subject_name']}}</td>
+		 		<td>{{row['exam_status']}}</td>
+		 		{%  if row['exam_status']=='result published'%}
+		 		<td><a href="?action2=result&examid={{row['exam_id']}}&name={{row['exam_title']}}&sid={{data['sid']}}" class="btn btn-primary">VIEW RESULT</a></td>
+		 		{% endif %}
+		 	</tr>
+		 	{% endfor %}
+		 </table>
+	
+
+{% else%}
+{% if data['student'] %}
+	<h1>VIEW EXAM REGISTERED EXAMS</h1>
+	<table class="table" style="width: 800px">
+		<tr>
+			<th>CHILD NAME</th>
+			<th>DATE OF BIRTH</th>
+			<th>PHONE</th>
+			<th>EMAIL</th>
+			<th>SELECTED COURSE</th>
+			<th>VIEW REGISTERED EXAMS</th>
+			
+		</tr>
+	{% for row in data['student'] %}
+	<tr>
+		<td>{{row['first_name']}} {{row['last_name']}}</td>
+		<td>{{row['dob']}}</td>
+		<td>{{row['phone']}}</td>
+		<td>{{row['email']}}</td>
+		<td>{{row['course_name']}}</td>
+		<td><a href="?action=reg&sid={{row['student_id']}}&name={{row['first_name']}} {{row['last_name']}}" class="btn btn-info">VIEW REGISTERED EXAMS OF {{row['first_name']}}</a></td>
+	</tr>
+	{% endfor %}
+	</table>
+	{% endif %}
+	{% endif %}
+</form>
+</center>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+</center>
+{% include 'footer.html' %}

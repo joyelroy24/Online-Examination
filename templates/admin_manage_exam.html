@@ -1,0 +1,205 @@
+{% include 'adminheader.html' %}
+
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/static/exam2.png);background-attachment: fixed;height: auto" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-8  text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+							<form method="post">
+	<center>
+	
+
+	{% if data['students'] %}
+	<table class="table" style="width: 700px" align="center">
+		<h2>REGISTERED STUDENTS OF EXAM {{data['title']}}</h2>
+		<tr>
+			<th>NAME</th>
+			<th>DATE OF BIRTH</th>
+			<th>PLACE</th>
+			<th>PHONE</th>
+			<th>EMAIL</th>
+			<th>AMOUNT PAID</th>
+		</tr>
+		{% for row in data['students'] %}
+		<tr>
+			<td>{{row['first_name']}} {{row['last_name']}}</td>
+			<td>{{row['dob']}}</td>
+			<td>{{row['phone']}}</td>
+			<td>{{row['phone']}}</td>
+			<td>{{row['email']}}</td>
+			<td>{{row['amount']}}</td>
+		</tr>
+		{% endfor %}
+
+	</table>
+	{% else %}
+		{% if data['updater'] %}
+		<h1>UPDATE EXAMINATION DETAILS</h1>
+		<table class="table" style="width: 1000px">
+			<tr>
+				<th>EXAM TITLE</th>
+				<td>{{data['updater'][0]['exam_title']}}</td>
+			</tr>
+			<tr>
+				<th>EXAM DETAILS</th>
+				<td><input type="text" name="updetails" value="{{data['updater'][0]['exam_details']}}" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>SUBJECT</th>
+				<td>{{data['updater'][0]['subject_name']}}</td>
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<th>SELECT EXAMINER</th>
+				<td>
+					<select name="upexaminer">
+
+					{% for row in data['examiner'] %}
+					{% if row['examiner_id']==data['updater'][0]['examiner_id'] %}
+					<option selected value="{{row['examiner_id']}}">{{row['first_name']}} {{row['last_name']}}</option>
+					{% else %}
+					<option value="{{row['examiner_id']}}">{{row['first_name']}} {{row['last_name']}}</option>
+					{% endif %}
+					{% endfor %}
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>DATE</th>
+				<td><input type="date" name="update" value="{{data['updater'][0]['exam_date']}}" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>EXAM FEE</th>
+				<td class="btn btn-primary">{{data['updater'][0]['exam_fees']}}</td>
+			</tr>
+	
+			<tr>
+				<th>STATUS</th>
+				<td>
+					<select name="upstatus">
+						{% if data['updater'][0]['exam_status']=='Announced' %}
+						<option selected>Announced</option>
+						<option>Post Poned</option>
+
+						{% else %}
+						<option selected="">Post Poned</option>
+						<option>Announced</option>
+						{% endif %}
+					</select>
+
+			</tr>
+			
+			<tr>
+				<td align="center" colspan="2">
+					<input type="submit" name="update" value="UPDATE" class="btn btn-primary">
+				</td>
+			</tr>
+			
+		</table>
+		{% else %}
+		<h1>MANGE EXAMS</h1>
+		<table class="table" style="width: 800px;height: 600px" >
+			<tr>
+				<th>EXAM TITLE</th>
+				<td><input type="text" class="form-control" name="title" required></td>
+			</tr>
+			<tr>
+				<th>EXAM DETAILS</th>
+				<td><input type="text" name="details" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>SELECT SUBJECT</th>
+				<td>
+					<select name='subject' class="form-control">
+					{% for row in data['subject'] %}
+					<option value="{{row['subject_id']}}">{{row['subject_name']}}</option>
+					{% endfor %}
+				</select>
+				</td>
+			</tr>
+			<tr>
+				<th>SELECT EXAMINER</th>
+				<td><select name="examiner" class="form-control">
+					<option>--SELECT--</option>
+					{% for row in data['examiner'] %}
+					<option value="{{row['examiner_id']}}">{{row['first_name']}} {{row['last_name']}}</option>
+					{% endfor %}
+					</select></td>
+			</tr>
+			<tr>
+				<th>DATE</th>
+				<td><input type="date" name="date" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>EXAM FEE</th>
+				<td><input type="text" name="examfee" class="form-control" required></td>
+			</tr>
+			<tr>
+				<td align="center" colspan="2">
+					<input type="submit" name="submit" value="ADD" class="btn btn-primary">
+				</td>
+			</tr>
+		</table>
+		{% endif %}
+
+		{% if data['exams'] %}
+		<h1>EXAMS ALREADY SHEDULED</h1>
+		
+		<table class="table" >
+
+			<tr>
+				<th>EXAM TITLE</th>
+				<th>DETAILS</th>
+				<th>COURSE</th>
+				<th>SUBJECT</th>
+				<th>EXAMINER</th>
+				<th>EXAM FEE</th> 
+				<th>DATE OF EXAM</th>
+				<th>EXAM STATUS</th>
+				<th>VIEW REGISTERED STUDENTS</th>
+				<th>UPDATE</th>
+				<th>DELETE</th>
+				
+			</tr>
+			
+			{% for row in data['exams'] %}
+
+			<tr>
+				<td>{{row['exam_title']}}</td>
+				<td>{{row['exam_details']}}</td>
+				<td>{{row['course_name']}}</td>
+				<td>{{row['subject_name']}}</td>
+				<td>{{row['first_name']}}</td>
+				<td>{{row['exam_fees']}}</td>
+				<td>{{row['exam_date']}}</td>
+				<td>{{row['exam_status']}}</td>
+				<td><a href="?action2=student&id={{row['exam_id']}}&examtitle={{row['exam_title']}}" class="btn btn-video">VIEW STUDENTS</a></td>
+				{% if row['exam_status'] in('Announced','Post Poned') %}
+				<td><a href="?action=update&id={{row['exam_id']}}" class="btn btn-warning">UPDATE</a></td>
+				<td><a href="?action=delete&id={{row['exam_id']}}" class="btn btn-danger">DELETE</a></td>
+				{% endif %}
+			</tr>
+			{% endfor %}
+	
+		</table>
+		<br>
+
+	{% endif %}
+	{% endif %}
+	</form>
+</center>
+							<!-- <p><a class="btn btn-primary btn-lg btn-learn" href="#">Take A Course</a> <a class="btn btn-primary btn-lg popup-vimeo btn-video" href="https://vimeo.com/channels/staffpicks/93951774"><i class="icon-play"></i> Watch Video</a></p> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+
+	
+
+{% include 'footer.html' %}

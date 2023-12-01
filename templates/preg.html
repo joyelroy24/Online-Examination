@@ -1,0 +1,69 @@
+{% include 'publicheader.html' %}
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/static/exam2.png); background-attachment: fixed;height: auto" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+							<center>
+	<H1>PARENT REGISTRATION</H1>
+	<form method="post">
+		<table class="table" style="width: 500px">
+			<tr>
+				<th>FIRST NAME</th>
+				<td><input type="text" name="fname" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>LAST NAME</th>
+				<td><input type="text" name="lname" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>DATE OF BIRTH</th>
+				<td><input type="date" name="dob" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>PHONE</th>
+				<td><input type="text" name="ph" class="form-control" required pattern="[0-9]{10}"></td>
+			</tr>
+			<tr>
+				<th>EMAIL</th>
+				<td><input type="text" name="email" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>HOUSE NAME</th>
+				<td><input type="text" name="hname" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>PLACE</th>
+				<td><input type="text" name="place" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>PINCODE</th>
+				<td><input type="text" name="pin" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>USER NAME</th>
+				<td><input type="text" name="uname" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>PASSWORD</th>
+				<td><input type="password" name="password" class="form-control" required minlength="8"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="REGISTER" class="btn btn-primary"></td>
+			</tr>
+		</table>
+	</form>
+</center>
+							<!-- <p><a class="btn btn-primary btn-lg btn-learn" href="#">Take A Course</a> <a class="btn btn-primary btn-lg popup-vimeo btn-video" href="https://vimeo.com/channels/staffpicks/93951774"><i class="icon-play"></i> Watch Video</a></p> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+
+
+
+{% include 'footer.html' %}

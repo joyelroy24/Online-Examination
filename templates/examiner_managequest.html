@@ -1,0 +1,66 @@
+{% include 'examinerheader.html' %}
+
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/static/examc2.png); background-attachment: fixed;height: auto" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+<form method='post'>
+<center>
+ 
+	<h2>MANAGE QUESTIONS OF {{name}}</h2>
+
+<table class="table">
+	<tr>
+		<th>QUESTION</th>
+		<td><input type="text" name="quest" class="form-control" required></td>
+	</tr>
+	<tr>
+		<th>MARK</th>
+		<td><input type="text" name="mark" class="form-control" required></td>
+	</tr>
+	<tr>
+		<th>DESCRIPTION</th>
+		<td><input type="text" name="des" class="form-control" required></td>
+	</tr>
+	<tr>
+		<td colspan="2" align="center"><input type="submit" name="submit" value="ADD" class="btn btn-info"></td>
+	</tr>
+</table>
+
+{% if data['quest'] %}
+<table class="table">
+	<tr>
+		<th>QUESTION</th>
+		<th>MARK</th>
+		<th>DESCRIPTION</th>
+		<th>ADD OPTIONS</th> 
+		<th>DELETE</th>
+	</tr>
+		{% for row in data['quest'] %}
+	<tr>
+		<td>{{row['question']}}</td>
+		<td>{{row['maximum_mark']}}</td>
+		<td>{{row['description']}}</td>
+
+		<td><a href="examiner_addop?qid={{row['question_id']}}&id={{row['exam_id']}}&name={{name}}&quest={{row['question']}}"  class="btn btn-primary">ADD ANSWER OPTIONS</a></td>
+		<td><a href="?action=delete&qid={{row['question_id']}}&id={{row['exam_id']}}&name={{name}}&quest={{row['question']}}"  class="btn btn-danger">DELETE</a></td>
+	</tr>
+	{%  endfor %}
+</table>
+{% endif %}
+</center>
+</form>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+</center>
+
+
+
+{% include 'footer.html'%}

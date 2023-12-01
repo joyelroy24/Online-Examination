@@ -1,0 +1,62 @@
+{% include 'examinerheader.html' %}
+
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/static/examc2.png); background-attachment: fixed;height: auto" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8  text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+<center>
+	<form>
+		{% if data['upstatus'] %}
+		<h1>UPDATE STATUS OF {{data['upstatus'][0]['exam_title']}}</h1>
+		<table class="table" style="width: 500px">
+			<tr>
+				<td><a href="?action=conducted&id={{data['upstatus'][0]['exam_id']}}" class="btn btn-primary">UPDATE STATUS AS CONDUCTED</a></td>
+			</tr>
+			<tr>
+				<td><a href="?action=published&id={{data['upstatus'][0]['exam_id']}}" class="btn btn-warning">UPDATE STATUS AS RESULT PUBLISHED </a></td>
+			</tr>
+		</table>
+		{% else %}
+	<h1>VIEW EXAMS CREATED</h1>
+	{% if data['exams'] %}
+		<table class="table" style="width: 1200px">
+			<tr>
+				<th>EXAM TITLE</th>
+				<th>DETAILS</th>
+				<th>COURSE</th>
+				<th>SUBJECT</th>
+				<th>EXAM FEE</th>
+				<th>DATE OF EXAM</th>
+				<th>EXAM STATUS</th>
+			</tr>
+			{% for row in data['exams'] %}
+			<tr>
+				<td>{{row['exam_title']}}</td>
+				<td>{{row['exam_details']}}</td>
+				<td>{{row['course_name']}}</td>
+				<td>{{row['subject_name']}}</td>
+				<td>{{row['exam_fees']}}</td>
+				<td>{{row['exam_date']}}</td>
+				<td>{{row['exam_status']}}</td>
+				<td><a href="examiner_managequest?id={{row['exam_id']}}&name={{row['exam_title']}}"  class="btn btn-primary">MANAGE QUESTIONS</a></td>
+				<td><a href="?action=update&id={{row['exam_id']}}"  class="btn btn-warning">UPDATE STATUS</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+	{% endif %}
+	</form>
+</center>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+</center>
+
+
+{% include 'footer.html' %}

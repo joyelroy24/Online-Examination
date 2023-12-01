@@ -1,0 +1,100 @@
+{% include 'parentheader.html' %}
+
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/static/exam3.jpg); background-attachment: fixed;height: auto" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12  text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+<center>
+	<form method="post">
+		{% if data['pay'] %}
+	<h1>PAY AND COMPLETE YOUR BOOKING</h1>
+		<table class="table" style="width: 600px">
+			<tr>
+				<th colspan="2" align="left">Payment Details</th>
+			</tr>
+			<tr>
+				<th align="left">CARD NUMBER</th>
+				<td colspan="2"><input type="text" name="cardno" class="form-control"><td>
+			</tr>
+			<tr>
+				<th>EXP DATE</th>
+				<th align="center">CV</th>
+			</tr>
+			<tr>
+				<td><input type="text" name="monthdate" class="form-control"></td>
+				<td><input type="text" name="cv" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>AMOUNT</th>
+				<td class="btn btn-warning" align="center">{{data['pay']}}</td>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="pay" value="CONFIRM PAYMENT" class="btn btn-primary"></td>
+			</tr>
+		</table>
+	{% else %}
+
+		 {% if data['exam'] %}
+		 <h1> VIEW EXAMS THAT {{data['exam'][0]['first_name']}} CAN APPLY</h1>
+		<table class="table" style="width: 1200px">
+		 	<tr>
+		 		<th>EXAM TITLE</th>
+		 		<th>EXAM DETAILS</th>
+		 		<th>EXAMINER</th>
+		 		<th>EXAM FEE</th>
+		 		<th>EXAM DATE</th>
+		 		<th>SUBJECT</th>
+		 		<th>REGISTER</th>
+		 	</tr>
+		 	{% for row in data['exam'] %}
+		 	<tr>
+		 		<td>{{row['exam_title']}}</td>
+		 		<td>{{row['exam_details']}}</td>
+		 		<td>{{row['examinerfname']}}</td>
+		 		<td>{{row['exam_fees']}}</td>
+		 		<td>{{row['exam_date']}}</td>
+		 		<td>{{row['subject_name']}}</td>
+		 		<td><a href="?action2=register&examid={{row['exam_id']}}&sid={{row['student_id']}}&fee={{row['exam_fees']}}&cid={{row['course_id']}}" class="btn btn-info">REGISTER</a></td>
+		 	</tr>
+		 	{% endfor %}
+		 </table>
+		 {% else %}
+		{% if data['student'] %}
+	<h1>VIEW EXAM SHEDULED</h1>
+	<table class="table" style="width: 800px">
+		<tr>
+			<th>CHILD NAME</th>
+			<th>DATE OF BIRTH</th>
+			<th>PHONE</th>
+			<th>EMAIL</th>
+			<th>SELECTED COURSE</th>
+			<th>VIEW EXAMS</th>
+			
+		</tr>
+	{% for row in data['student'] %}
+	<tr>
+		<td>{{row['first_name']}} {{row['last_name']}}</td>
+		<td>{{row['dob']}}</td>
+		<td>{{row['phone']}}</td>
+		<td>{{row['email']}}</td>
+		<td>{{row['course_name']}}</td>
+		<td><a href="?action=exam&sid={{row['student_id']}}&cid={{row['course_id']}}" class="btn btn-info">VIEW EXAMS {{row['first_name']}} CAN APPLY</a></td>
+	</tr>
+	{% endfor %}
+	</table>
+	{% endif %}
+	{% endif %}
+	{% endif %}
+	</form>
+</center>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+</center>
+
+{% include 'footer.html' %}

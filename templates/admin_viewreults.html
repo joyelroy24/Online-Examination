@@ -1,0 +1,72 @@
+{% include 'adminheader.html' %}
+
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/static/exam2.png);height: auto;background-attachment: fixed;" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+	<center>
+	{% if data['viewstu'] %}
+	<h1>RANK LIST OF {{data['title']}} EXAMINATION</h1>
+	<table class="table" style="width: 800px">
+		<tr>
+			<th colspan="5" align="center">EXAM MARK OUT OF {{data['max']}}</th>
+		</tr>
+		<tr>
+			<th>RANK </th>
+			<th>STUDENT NAME</th>
+			<th>CONTACT NUMBER</th>
+			<th>EMAIL</th>
+			<th>MARK OBTAINED<th>
+		</tr>
+		{% for row in data['viewstu'] %}
+		<tr>
+			<td>RANK {{loop.index}}</td>
+			<td>{{row['first_name']}} {{row['last_name']}}</td>
+			<td>{{row['phone']}}</td>
+			<td>{{row['email']}}</td>
+			<td>{{row['total_mark']}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% else %}
+
+{% if data['exams'] %}
+		<h1>VIEW RESULTS</h1>
+		<table class="table" style="width: 500px">
+			<tr>
+				<th>EXAM TITLE</th>
+				<th>DETAILS</th>
+				<th>COURSE</th>
+				<th>SUBJECT</th>
+				<th>EXAMINER</th>
+				<th>DATE OF EXAM</th>
+				<th>VIEW RANK LIST</th>
+			</tr>
+			{% for row in data['exams'] %}
+			<tr> 
+				<td>{{row['exam_title']}}</td>
+				<td>{{row['exam_details']}}</td>
+				<td>{{row['course_name']}}</td>
+				<td>{{row['subject_name']}}</td>
+				<td>{{row['first_name']}}</td>
+				<td>{{row['exam_date']}}</td>
+				<td><a href="?action=viewstu&id={{row['exam_id']}}&examtitle={{row['exam_title']}}" class="btn btn-primary">VIEW RANK LIST</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+	{% endif %}
+	{% endif %}
+	</center>
+							<!-- <p><a class="btn btn-primary btn-lg btn-learn" href="#">Take A Course</a> <a class="btn btn-primary btn-lg popup-vimeo btn-video" href="https://vimeo.com/channels/staffpicks/93951774"><i class="icon-play"></i> Watch Video</a></p> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+</center>
+
+{% include 'footer.html' %}
