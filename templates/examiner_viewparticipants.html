@@ -1,0 +1,75 @@
+{% include 'examinerheader.html' %}
+
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/static/examc2.png); background-attachment: fixed;height: auto" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12  text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+<center>
+<form method="post">
+	{% if data['viewstu'] %} 
+	<h1>RANK LIST OF {{data['title']}}</h1>
+	<h1  class="btn btn-warning">EXAM MARK OUT OF {{data['max']}}</h1>
+	<table class="table" style="width: 800px">
+		
+		<tr>
+			<th>RANK </th>
+			<th>STUDENT NAME</th>
+			<th>CONTACT NUMBER</th>
+			<th>EMAIL</th>
+			<th>MARK OBTAINED<th>
+		</tr>
+		{% for row in data['viewstu'] %}
+		<tr>
+			<td align="center">RANK {{loop.index}}</td>
+			<td>{{row['first_name']}} {{row['last_name']}} </td>
+			<td>{{row['phone']}}</td>
+			<td>{{row['email']}}</td>
+			<td>{{row['total_mark']}}</td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% else %}
+<h1>VIEW EXAMS CONDUCTED</h1>
+	{% if data['exams'] %}
+		<table class="table" style="width: 1200px">
+			<tr>
+				<th>EXAM TITLE</th>
+				<th>DETAILS</th>
+				<th>COURSE</th>
+				<th>SUBJECT</th>
+				<th>DATE OF EXAM</th>
+				<th>EXAM STATUS</th>
+				<th>VIEW RANK LIST</th>
+			</tr>
+			{% for row in data['exams'] %}
+			<tr>
+				<td>{{row['exam_title']}}</td>
+				<td>{{row['exam_details']}}</td>
+				<td>{{row['course_name']}}</td>
+				<td>{{row['subject_name']}}</td>
+				<td>{{row['exam_date']}}</td>
+				<td>{{row['exam_status']}}</td>
+				<td><a href="?action=viewstu&examid={{row['exam_id']}}&examname={{row['exam_title']}}" class="btn btn-primary">VIEW RANK LIST</a></td>
+			</tr>
+			{% endfor %}
+		</table>
+		{% else%}
+		<h3>NO EXAMS CONDUCTED</h3>
+	{% endif %}
+	{% endif %}
+	</form>
+</center>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+</center>
+
+
+{% include 'footer.html' %}

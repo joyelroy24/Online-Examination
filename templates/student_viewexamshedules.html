@@ -1,0 +1,47 @@
+{% include 'studentheader.html' %}
+
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/static/exam2.png); background-attachment: fixed;height: auto" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12  text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+<center>
+	<form method="post">
+		{% if data['exam'] %}
+		<h1>VIEW EXAMS</h1>
+		<table class="table" style="width: 1200px">
+		 	<tr>
+		 		<th>EXAM TITLE</th>
+		 		<th>EXAM DETAILS</th>
+		 		<th>EXAMINER</th>
+		 		<th>EXAM FEE</th>
+		 		<th>EXAM DATE</th>
+		 		<th>SUBJECT</th>
+		 		<th>PARTICIPATE</th>
+		 	</tr>
+		 	{% for row in data['exam'] %}
+		 	<tr>
+		 		<td>{{row['exam_title']}}</td>
+		 		<td>{{row['exam_details']}}</td>
+		 		<td>{{row['examinerfname']}}</td>
+		 		<td>{{row['exam_fees']}}</td>
+		 		<td>{{row['exam_date']}}</td>
+		 		<td>{{row['subject_name']}}</td>
+		 		<td><a href="?action=participate&examid={{row['exam_id']}}" class="btn btn-primary">PARTICIPATE</a></td>
+		 	</tr>
+		 	{% endfor %}
+		 </table>
+		{% endif %}
+	</form>
+</center>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+</center>
+
+{% include 'footer.html' %}

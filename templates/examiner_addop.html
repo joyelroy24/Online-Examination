@@ -1,0 +1,62 @@
+{% include 'examinerheader.html' %}
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/static/examc2.png); background-attachment: fixed;height: auto" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 col-md-offset-2 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+<center>
+	<a href="examiner_managequest?name={{name}}&id={{id}}"  class="btn btn-primary">GO TO QUESTIONS PAGE</a>
+	<form method="post">
+		<h2>MANAGE OPTIONS OF - {{quest}}</h2>
+	<table class="table" style="width: 400px">
+		<tr>
+			<th>OPTION</th>
+			<td><input type="text" name="option" class="form-control"></td>
+		<tr>
+			<th>STATUS OF OPTION</th>
+			<td>
+				<select name="status" class="form-control">
+					<option>true</option>
+					<option>false</option>
+				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2" align="center"><input type="submit" name="submit" value="ADD" class="btn btn-info"></td>
+		</tr>
+	</table>
+	<br>
+	{% if data['option'] %}
+	<h2>OPTIONS ADDED</h2>
+	<table class="table" style="width: 500px">
+	<tr>
+		<th>OPTION</th>
+		<th>STATUS</th>
+		<th>DELETE</th>
+	</tr>
+
+		{% for row in data['option'] %}
+		<tr>
+			<td>{{row['option']}}</td>
+			<td>{{row['status']}}</td>
+			<td><a href="?action=delete&oid={{row['qstansr_id']}}&id={{id}}&quest={{quest}}&name={{name}}&qid={{qid}}" class="btn btn-danger">DELETE</a></td>
+		</tr>
+		{% endfor %}
+	</table>
+	{% endif %}
+
+	</form>
+</center>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+</center>
+
+
+
+{% include 'footer.html' %}

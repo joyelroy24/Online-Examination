@@ -1,0 +1,13 @@
+<script type="text/javascript">
+	var currentValue = 0;
+function handleClick(myRadio) {
+    currentValue = myRadio.value;
+    document.getElementById("anss").value =  "1";
+    alert(currentValue);
+    
+}
+</script>
+<input type="radio" onclick="handleClick(this)" name="reportContent" value="1" >
+<input type="radio" onclick="handleClick(this)" name="reportContent" value="2" >
+
+<input type="text" name="anss" id ="anss" >

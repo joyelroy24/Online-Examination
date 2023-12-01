@@ -1,0 +1,113 @@
+{% include 'adminheader.html'  %}
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/static/exam2.png); background-attachment: fixed;height: auto" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container">
+			<div class="row">
+				<div class="col-md-8 text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+	<center>
+	<form method="post">
+		{% if data['updater'] %}
+		<h1>UPDATE DETAILS OF {{data['updater'][0]['first_name']}}</h1>
+		<table class="table" style="width: 800px">
+			<tr>
+				<th>FIRST NAME</th>
+				<td><input type="text" name="upfname" value="{{data['updater'][0]['first_name']}}" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>LAST NAME</th>
+				<td><input type="text" name="uplname" value="{{data['updater'][0]['last_name']}}" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>QAULIFICATION</th>
+				<td><input type="text" name="upqua" value="{{data['updater'][0]['qualification']}}" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>PHONE</th>
+				<td><input type="text" name="upph" value="{{data['updater'][0]['phone']}}" class="form-control"></td>
+			</tr>
+			<tr>
+				<th>EMAIL</th>
+				<td><input type="text" name="upemail" value="{{data['updater'][0]['email']}}" class="form-control"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="update" value="UPDATE" class="btn btn-info"></td>
+			</tr>
+		</table>
+		{% else %}
+		<h1>MANAGE EXAMINER</h1>
+		<table class="table" align="center" style="width: 800px">
+			<tr>
+				<th>FIRST NAME</th>
+				<td><input type="text" name="fname" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>LAST NAME</th>
+				<td><input type="text" name="lname" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>QUALIFICATION</th>
+				<td><input type="text" name="qua" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>PHONE</th>
+				<td><input type="text" name="ph" class="form-control" required pattern="[0-9]{10}"></td>
+			</tr>
+			<tr>
+				<th>EMAIL</th>
+				<td><input type="text" name="email" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>USERNAME</th>
+				<td><input type="text" name="uname" class="form-control" required></td>
+			</tr>
+			<tr>
+				<th>PASSWORD</th>
+				<td><input type="password" name="password" class="form-control" minlength="8" title="password must be 8 charecter"></td>
+			</tr>
+			<tr>
+				<td colspan="2" align="center"><input type="submit" name="submit" value="REGISTER" class="btn btn-info"></td>
+			</tr>
+		</table>
+		{% endif %}
+		<br>
+		{% if data['examiner'] %}
+		<table class="table" style="width: 1100px">
+			<tr>
+				<th>FIRST NAME</th>
+				<th>LAST NAME</th>
+				<th>QUALIFICATION</th>
+				<th>PHONE</th>
+				<th>EMAIL</th>
+				<th>UPDATE</th>
+				<th>DELETE</th>
+			</tr>
+			{% for row in data['examiner'] %}
+			<tr>
+				<td>{{row['first_name']}}</td>
+				<td>{{row['last_name']}}</td>
+				<td>{{row['qualification']}}</td>
+				<td>{{row['phone']}}</td>
+				<td>{{row['email']}}</td>
+				<td><a href="?action=update&id={{row['login_id']}}" class="btn btn-warning">UPDATE</a></td>
+				<td><a href="?action=delete&id={{row['login_id']}}" class="btn btn-danger">DELETE</a></td>
+			
+			</tr>
+			{% endfor%}
+		</table>
+		{% endif %}
+	</form>
+</center>
+							<!-- <p><a class="btn btn-primary btn-lg btn-learn" href="#">Take A Course</a> <a class="btn btn-primary btn-lg popup-vimeo btn-video" href="https://vimeo.com/channels/staffpicks/93951774"><i class="icon-play"></i> Watch Video</a></p> -->
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+</center>
+
+
+
+{% include 'footer.html'%}

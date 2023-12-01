@@ -1,0 +1,142 @@
+{% include 'studentheader.html' %}
+
+<header id="fh5co-header" class="fh5co-cover" role="banner" style="background-image:url(/static/exam2.png); background-attachment: fixed;height: auto" data-stellar-background-ratio="0.5">
+		<div class="overlay"></div>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-12  text-center">
+					<div class="display-t">
+						<div class="display-tc animate-box" data-animate-effect="fadeIn">
+<center>
+	<script type="text/javascript">
+	var currentValue = 0;
+function handleClick(myRadio) {
+    currentValue = myRadio.value;
+    // alert(currentValue)
+    document.getElementById("anss").value =  currentValue;
+}
+
+	</script>
+<form method="post">
+	{% if data['next'] %}
+	<h1>{{data['qno']}}. {{data['next'][0]['question']}}</h1>
+	<table class="table" style="width: 700px">
+		<input type="text" name="anss" hidden id="anss">
+
+		{% for row in data['next'] %}
+		<tr>
+			<td>{{loop.index}}.</td>
+			{% if data['added'] %}
+				{% if data['added'][0]['qstansr_id'] |int==row['qstansr_id'] |int %}
+				<td><input type="radio" name="ans" onclick="handleClick(this)" value="{{row['qstansr_id']}}" checked>
+				{{row['option']}}</td>	
+				{% else %}
+				<td><input type="radio" name="ans" onclick="handleClick(this)" value="{{row['qstansr_id']}}">
+				{{row['option']}}</td>
+				{% endif %}
+			{% else %}
+			<td><input type="radio" name="ans" onclick="handleClick(this)" value="{{row['qstansr_id']}}">
+			{{row['option']}}</td>
+			{% endif %}
+			
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3" align="center"><input type="submit" name="nxtsubmit" value="SUBMIT" class="btn btn-primary"></td>
+		</tr>
+		<tr>
+			<br>
+			<td colspan="3" align="left"><a href="?action2=pre&pid={{data['next'][0]['question_id']-1}}&examid={{examid}}&qno={{data['qno']}}" class="btn btn-warning">PREVIOUS</a></td>
+			{% if data['last']==data['next'][0]['question_id'] %}
+			<tr>
+				<td colspan="3" align="center"><input type="submit" name="complete" value="CLICK HERE TO EXIT FROM EXAM" class="btn btn-danger"></td>
+			</tr>
+			
+			{% else %}
+			<td colspan="3" align="right"><a href="?action=next&nid={{data['next'][0]['question_id']+1}}&examid={{examid}}&qno={{data['qno']}}" class="btn btn-danger">NEXT</a></td>
+			{% endif %}
+	</table>	
+	{% elif data['pre'] %}	
+	<table class="table" style="width: 700px">
+		<input type="text" name="anss" hidden id="anss">
+		<h1>{{data['qno']}}. {{data['pre'][0]['question']}}</h1>
+		{% for row in data['pre'] %}
+		<tr>
+			<td>{{loop.index}}.</td>
+			{% if data['added'] %}
+				{% if data['added'][0]['qstansr_id'] |int==row['qstansr_id'] |int %}
+				<td><input type="radio" name="ans" onclick="handleClick(this)" value="{{row['qstansr_id']}}" checked>
+				{{row['option']}}</td>	
+				{% else %}
+				<td><input type="radio" name="ans" onclick="handleClick(this)"  value="{{row['qstansr_id']}}">
+				{{row['option']}}</td>
+				{% endif %}
+			{% else %}
+			<td><input type="radio" name="ans" onclick="handleClick(this)" value="{{row['qstansr_id']}}">
+			{{row['option']}}</td>
+			{% endif %}
+		
+		</tr>
+		{% endfor %}
+		<tr>
+			<td colspan="3" align="center"><input type="submit" name="presubmit" value="SUBMIT" class="btn btn-primary"></td>
+		</tr>
+		<tr><br>
+			<td colspan="3" align="left">
+			{% if data['qone']==data['pre'][0]['question_id'] %}
+			{{pass}}
+
+			{% else %}<a href="?action2=pre&pid={{data['pre'][0]['question_id']-1}}&examid={{examid}}&qno={{data['qno']}}" class="btn btn-warning">PREVIOUS</a></td>
+			{% endif %}
+			<td colspan="3" align="right"><a href="?action=next&nid={{data['pre'][0]['question_id']+1}}&examid={{examid}}&qno={{data['qno']}}" class="btn btn-danger">NEXT</a></td>
+			
+	</table>	
+
+	{% else %}
+
+	{% if data['1q'] %}
+	<h1>{{data['qno']}}. {{data['1q'][0]['question']}}</h1>
+	<table class="table" style="width: 700px">
+		<input type="text" name="anss" hidden id="anss" >
+		{% for row in data['1q'] %}
+		<tr>
+			<td>{{loop.index}}.</td>
+				{% if data['added'] %}
+					{% if data['added'][0]['qstansr_id'] |int==row['qstansr_id'] |int %}
+						<td><input type="radio" name="ans" onclick="handleClick(this)" value="{{row['qstansr_id']}}" checked>
+						{{row['option']}}</td>	
+					{% else %}
+						<td><input type="radio" name="ans" onclick="handleClick(this)" value="{{row['qstansr_id']}}">
+						{{row['option']}}</td>
+					{% endif %}
+				{% else %}
+					<td><input type="radio" onclick="handleClick(this)" name="ans" value="{{row['qstansr_id']}}">
+					{{row['option']}}</td>
+				{% endif %}
+		</tr>
+		{% endfor %}
+
+		<tr>
+
+			<td colspan="3" align="center"><input type="submit" name="submit" value="SUBMIT" class="btn btn-primary"></td>
+		</tr>
+		<tr>
+			
+			<td colspan="3" align="right"><a href="?action=next&nid={{data['1q'][0]['question_id']+1}}&examid={{examid}}&qno={{data['qno']}}" class="btn btn-danger">NEXT</a></td>
+		</tr>
+	</table>		
+	{% endif %}	
+
+	{% endif %}	
+</form>
+</center>
+
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</header>
+</center>
+
+{% include 'footer.html' %}
